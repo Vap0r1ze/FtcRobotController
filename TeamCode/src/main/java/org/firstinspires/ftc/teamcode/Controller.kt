@@ -19,8 +19,8 @@ class Controller : LinearOpMode() {
         waitForStart()
         runtime.reset()
         while (opModeIsActive()) {
-            dt.vx = gamepad1.left_stick_x.toDouble()
-            dt.vy = -gamepad1.left_stick_y.toDouble()
+            dt.vx = -gamepad1.left_stick_y.toDouble()
+            dt.vy = gamepad1.left_stick_x.toDouble()
             dt.w0 = gamepad1.right_stick_x.toDouble()
             dt.doLogic()
             dt.handleHardware()
