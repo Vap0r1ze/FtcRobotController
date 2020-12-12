@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.util.ElapsedTime
 
 @TeleOp(name = "Manual Driving", group = "Driving")
@@ -10,10 +11,10 @@ class Controller : LinearOpMode() {
     override fun runOpMode() {
         telemetry.addData("Status", "Initializing...")
         telemetry.update()
-        val dt = DriveTrain(hardwareMap)
+        val dt = DriveTrain(hardwareMap, DcMotor.RunMode.RUN_WITHOUT_ENCODER)
         dt.halfDtLength = 6.0
         dt.halfDtWidth = 6.0
-        dt.wheelR = 2.0
+        dt.wheelR = 4.0
         telemetry.addData("Status", "Initialized")
         telemetry.update()
         waitForStart()
