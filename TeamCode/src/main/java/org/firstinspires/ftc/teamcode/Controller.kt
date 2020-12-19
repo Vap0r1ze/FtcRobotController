@@ -23,7 +23,7 @@ class Controller : LinearOpMode() {
             dt.vx = -gamepad1.left_stick_y.toDouble()
             dt.vy = gamepad1.left_stick_x.toDouble()
             dt.w0 = gamepad1.right_stick_x.toDouble()
-            val power = if (gamepad1.right_bumper) 0.5 else 1.0
+            val power = if (gamepad1.right_bumper) 1.0 else 0.5
             dt.doLogic(power)
             dt.handleHardware()
             telemetry.addData("<Vx, Vy, W0>", "<%.3f, %.3f, %.3f>", dt.vx, dt.vy, dt.w0)

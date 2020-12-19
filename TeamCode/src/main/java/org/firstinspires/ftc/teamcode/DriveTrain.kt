@@ -15,28 +15,31 @@ internal class DriveTrain(hardwareMap: HardwareMap, mode: DcMotor.RunMode) {
     var vy = 0.0
     var w0 = 0.0
     val wn: DoubleArray
-    public val motorGroups: Array<Array<DcMotor>>
+    val motorGroups: Array<Array<DcMotor>>
     private val servoGroups: Array<Array<Servo>>
 
     /* <w1, w2, w3, w4> = 1/r [<1, 1, 1, 1> <1, -1, -1, 1> (L1 + L2)<-1, 1, -1, 1>] <vx,vy, w0> */
     fun doLogic(power: Double) {
-        var max = 0.0
+        // Motors
+        var motorMax = 0.0
         for (i in 0..3) {
             var w = 0.0
             w += vx
             w += (if (i % 3 == 0) -1 else 1) * vy
             w += (if (i % 2 == 0) -1 else 1) * (halfDtLength + halfDtWidth) * w0
             wn[i] = w
-            if (abs(w) > max) {
-                max = abs(w)
+            if (abs(w) > motorMax) {
+                motorMax = abs(w)
             }
         }
-        if (max > 0) {
+        if (motorMax > 0) {
             for (i in 0..3) {
-                wn[i] /= max
+                wn[i] /= motorMax
                 wn[i] *= power
             }
         }
+
+        // TODO: Arm
     }
 
     fun handleHardware() {
