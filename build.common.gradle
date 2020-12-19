@@ -42,6 +42,11 @@ android {
         minSdkVersion 23
         targetSdkVersion 28
 
+        def vuforiaKeyPropertiesFile = rootProject.file("vuforiaKey.properties")
+        def vuforiaKeyProperties = new Properties()
+        vuforiaKeyProperties.load(new FileInputStream(vuforiaKeyPropertiesFile))
+        buildConfigField "String", "VUFORIA_KEY", vuforiaKeyProperties['vuforiaKey']
+
         /**
          * We keep the versionCode and versionName of robot controller applications in sync with
          * the master information published in the AndroidManifest.xml file of the FtcRobotController

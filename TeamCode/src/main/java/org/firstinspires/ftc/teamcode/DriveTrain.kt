@@ -19,7 +19,7 @@ internal class DriveTrain(hardwareMap: HardwareMap, mode: DcMotor.RunMode) {
     private val servoGroups: Array<Array<Servo>>
 
     /* <w1, w2, w3, w4> = 1/r [<1, 1, 1, 1> <1, -1, -1, 1> (L1 + L2)<-1, 1, -1, 1>] <vx,vy, w0> */
-    fun doLogic() {
+    fun doLogic(power: Double) {
         var max = 0.0
         for (i in 0..3) {
             var w = 0.0
@@ -34,6 +34,7 @@ internal class DriveTrain(hardwareMap: HardwareMap, mode: DcMotor.RunMode) {
         if (max > 0) {
             for (i in 0..3) {
                 wn[i] /= max
+                wn[i] *= power
             }
         }
     }

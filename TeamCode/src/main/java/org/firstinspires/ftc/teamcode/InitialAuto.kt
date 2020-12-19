@@ -12,22 +12,21 @@ class InitialAuto : LinearOpMode() {
     private val power: Double = 0.5
     override fun runOpMode() {
         dt = DriveTrain(hardwareMap, DcMotor.RunMode.RUN_USING_ENCODER)
-        (dt as DriveTrain).halfDtLength = 6.0
-        (dt as DriveTrain).halfDtWidth = 6.0
-        (dt as DriveTrain).wheelR = 2.0
+        dt!!.halfDtLength = 6.0
+        dt!!.halfDtWidth = 6.0
+        dt!!.wheelR = 2.0
         telemetry.addData("Status", "Initialized")
         telemetry.update()
         waitForStart()
-        (dt as DriveTrain).setTurnPos(100)
-        // moveDist(250.0)
-        // moveDist(-30.0)
-        // dt.setPower(0.0)
+        moveDist(250.0)
+        moveDist(-30.0)
+        dt!!.setPower(0.0)
     }
 
     private fun moveDist(cm: Double) {
         val direction = abs(cm)
         val time = (cm/vel).toLong()
-        (dt as DriveTrain).setPower(power * direction)
+        dt!!.setPower(power * direction)
         sleep(time)
     }
 }
