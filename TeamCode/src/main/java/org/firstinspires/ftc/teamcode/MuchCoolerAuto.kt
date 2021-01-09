@@ -20,8 +20,8 @@ class MuchCoolerAuto : LinearOpMode() {
     private var vuforia: VuforiaLocalizer? = null
     private var tfod: TFObjectDetector? = null
     private var targetZone = TargetZone.A
-    private val vel: Double = (118.0 / 3000) * (1.0 / 2.54)// (cm/s) * (in/cm)
-    private val radVel: Double = (PI + asin(5.0/7.0)) / 3000
+    private val vel: Double = (118.0 / 3000) * (1.0 / 2.54) // (cm/s) * (in/cm)
+    private val radVel: Double = (2*PI - acos(22.625/23.75)) / 5000
     private var power = 0.5
     override fun runOpMode() {
         // Init
@@ -36,7 +36,7 @@ class MuchCoolerAuto : LinearOpMode() {
         waitForStart()
         if (opModeIsActive()) {
             // move wobble to intermediate position
-            moveDist(40.0)
+            moveDist(45.0)
             // get into ring viewing position
             moveDist(-30.0)
             turnRads(-acos(23.5 / 28.5))
@@ -55,13 +55,13 @@ class MuchCoolerAuto : LinearOpMode() {
                     moveDist(27.0)
                 }
                 TargetZone.B -> {
-                    moveDist(38.0)
+                    moveDist(15.0)
                     moveDist(-8.0)
                     turnRads(acos(2.8/3.5))
                     moveDist(9.5)
                     turnRads(-acos(3.5/3.9) - acos(2.8/3.5))
                     moveDist(28.0)
-                    moveDist(-20.0)
+                    moveDist(-15.0)
                 }
                 TargetZone.C -> {
                     moveDist(64.0)
